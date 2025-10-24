@@ -5,10 +5,21 @@
 This is the power function using iteration
 Time complexity O(n)
     */
+
+int digits(int x)
+{
+    int res;
+    while (x > 0) {
+        x/=10;
+        res += 1;
+    }
+    return res;
+}
+
 int powe(int x, int mu)
 {
     int res = 1;
-    for(int i = 0; i<mu; i++) {
+    for (int i = 0; i<mu; i++) {
         res *= x;
     }
     return res;
@@ -24,7 +35,7 @@ int iteration(int x, int dig)
     int res = 0;
     int check = x;
     
-    while(x >0) {
+    for (int i = 0; i < dig; i++) {
         res += powe(x%10,dig);
         x/=10;
     }
@@ -42,7 +53,7 @@ The time complexity of this function is O(n^2)
     */
 int recursion(int x, int dig)
 {
-    if(x ==0) {
+    if (x ==0) {
         return 0;
     } else {
         return powe(x%10,dig) + recursion(x/10,dig);
@@ -54,12 +65,9 @@ int main() {
     int x;
     scanf("%d",&x);
     int y =x;
-    int dig = 0;
-    while(y >0) {
-        y/=10;
-        dig += 1;
-    }
-    if(recursion(x, dig) == x) {
+    int dig = digits(x);
+    
+    if (recursion(x, dig) == x) {
     // if(iteration(x, dig) == x) {
         printf("%d is a Armstrong number.\n", x);
     } else {
